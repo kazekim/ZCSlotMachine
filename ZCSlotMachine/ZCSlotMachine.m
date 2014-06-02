@@ -28,35 +28,50 @@ static const NSUInteger kMinTurn = 5;
 
 #pragma mark - View LifeCycle
 
-- (id)initWithFrame:(CGRect)frame {
+- (id)initWithFrame:(CGRect)frame
+{
     
     self = [super initWithFrame:frame];
     if (self) {
-        self.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        
-        _backgroundImageView = [[UIImageView alloc] initWithFrame:frame];
-        _backgroundImageView.contentMode = UIViewContentModeCenter;
-        [self addSubview:_backgroundImageView];
-        
-        _contentView = [[UIView alloc] initWithFrame:frame];
-#if SHOW_BORDER
-        _contentView.layer.borderColor = [UIColor blueColor].CGColor;
-        _contentView.layer.borderWidth = 1;
-#endif
-        
-        [self addSubview:_contentView];
-        
-        _coverImageView = [[UIImageView alloc] initWithFrame:frame];
-        _coverImageView.contentMode = UIViewContentModeCenter;
-        [self addSubview:_coverImageView];
-        
-        _slotScrollLayerArray = [NSMutableArray array];
-        
-        self.singleUnitDuration = 0.14f;
-        
-        _contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        [self setupLayout];
     }
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setupLayout];
+    }
+    return self;
+}
+
+-(void)setupLayout
+{
+    self.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    
+    _backgroundImageView = [[UIImageView alloc] initWithFrame:self.frame];
+    _backgroundImageView.contentMode = UIViewContentModeCenter;
+    [self addSubview:_backgroundImageView];
+    
+    _contentView = [[UIView alloc] initWithFrame:self.frame];
+#if SHOW_BORDER
+    _contentView.layer.borderColor = [UIColor blueColor].CGColor;
+    _contentView.layer.borderWidth = 1;
+#endif
+    
+    [self addSubview:_contentView];
+    
+    _coverImageView = [[UIImageView alloc] initWithFrame:self.frame];
+    _coverImageView.contentMode = UIViewContentModeCenter;
+    [self addSubview:_coverImageView];
+    
+    _slotScrollLayerArray = [NSMutableArray array];
+    
+    self.singleUnitDuration = 0.14f;
+    
+    _contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 #pragma mark - Properties Methods
