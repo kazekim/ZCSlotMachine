@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ZCSlotMachine"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "ZCSlotMachine for ios"
   s.platform     = :ios, '6.0'
   s.source       = { :git => "https://github.com/kazekim/ZCSlotMachine.git" ,

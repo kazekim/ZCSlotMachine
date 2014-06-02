@@ -24,6 +24,8 @@ static const NSUInteger kMinTurn = 5;
     NSArray *_currentSlotResults;
     
     __weak id<ZCSlotMachineDataSource> _dataSource;
+    
+    BOOL isInitFromCoder;
 }
 
 #pragma mark - View LifeCycle
@@ -33,6 +35,7 @@ static const NSUInteger kMinTurn = 5;
     
     self = [super initWithFrame:frame];
     if (self) {
+        isInitFromCoder = NO;
         [self setupLayout];
     }
     return self;
@@ -42,6 +45,7 @@ static const NSUInteger kMinTurn = 5;
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        isInitFromCoder = YES;
         [self setupLayout];
     }
     return self;
@@ -51,11 +55,20 @@ static const NSUInteger kMinTurn = 5;
 {
     self.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     
-    _backgroundImageView = [[UIImageView alloc] initWithFrame:self.frame];
+    if(isInitFromCoder){
+        _backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    }else{
+        _backgroundImageView = [[UIImageView alloc] initWithFrame:self.frame];
+    }
     _backgroundImageView.contentMode = UIViewContentModeCenter;
     [self addSubview:_backgroundImageView];
     
-    _contentView = [[UIView alloc] initWithFrame:self.frame];
+    
+    if(isInitFromCoder){
+        _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    }else{
+        _contentView = [[UIView alloc] initWithFrame:self.frame];
+    }
 #if SHOW_BORDER
     _contentView.layer.borderColor = [UIColor blueColor].CGColor;
     _contentView.layer.borderWidth = 1;
@@ -63,7 +76,12 @@ static const NSUInteger kMinTurn = 5;
     
     [self addSubview:_contentView];
     
-    _coverImageView = [[UIImageView alloc] initWithFrame:self.frame];
+    if(isInitFromCoder){
+        _coverImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    }else{
+        _coverImageView = [[UIImageView alloc] initWithFrame:self.frame];
+    }
+    
     _coverImageView.contentMode = UIViewContentModeCenter;
     [self addSubview:_coverImageView];
     
