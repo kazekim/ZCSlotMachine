@@ -6,7 +6,7 @@
 #define SHOW_BORDER 0
 
 static BOOL isSliding = NO;
-static const NSUInteger kMinTurn = 3;
+static const NSUInteger kMinTurn = 5;
 
 /********************************************************************************************/
 
